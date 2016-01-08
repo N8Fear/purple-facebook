@@ -2827,7 +2827,7 @@ m4trace:configure.ac:89: -1- m4_pattern_allow([^WITH_SSL_CERTS_TRUE$])
 m4trace:configure.ac:89: -1- m4_pattern_allow([^WITH_SSL_CERTS_FALSE$])
 m4trace:configure.ac:89: -1- _AM_SUBST_NOTMAKE([WITH_SSL_CERTS_TRUE])
 m4trace:configure.ac:89: -1- _AM_SUBST_NOTMAKE([WITH_SSL_CERTS_FALSE])
-m4trace:configure.ac:91: -1- PKG_CHECK_MODULES([GLIB], [glib-2.0 >= 2.20.0 gobject-2.0])
+m4trace:configure.ac:91: -1- PKG_CHECK_MODULES([GLIB], [glib-2.0 >= 2.28.0 gio-2.0 gobject-2.0])
 m4trace:configure.ac:91: -1- PKG_PROG_PKG_CONFIG
 m4trace:configure.ac:91: -1- m4_pattern_forbid([^_?PKG_[A-Z_]+$])
 m4trace:configure.ac:91: -1- m4_pattern_allow([^PKG_CONFIG(_(PATH|LIBDIR|SYSROOT_DIR|ALLOW_SYSTEM_(CFLAGS|LIBS)))?$])
@@ -2838,9 +2838,9 @@ m4trace:configure.ac:91: -1- m4_pattern_allow([^PKG_CONFIG_LIBDIR$])
 m4trace:configure.ac:91: -1- m4_pattern_allow([^PKG_CONFIG$])
 m4trace:configure.ac:91: -1- m4_pattern_allow([^GLIB_CFLAGS$])
 m4trace:configure.ac:91: -1- m4_pattern_allow([^GLIB_LIBS$])
-m4trace:configure.ac:91: -1- PKG_CHECK_EXISTS([glib-2.0 >= 2.20.0 gobject-2.0], [pkg_cv_[]GLIB_CFLAGS=`$PKG_CONFIG --[]cflags "glib-2.0 >= 2.20.0 gobject-2.0" 2>/dev/null`
+m4trace:configure.ac:91: -1- PKG_CHECK_EXISTS([glib-2.0 >= 2.28.0 gio-2.0 gobject-2.0], [pkg_cv_[]GLIB_CFLAGS=`$PKG_CONFIG --[]cflags "glib-2.0 >= 2.28.0 gio-2.0 gobject-2.0" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
-m4trace:configure.ac:91: -1- PKG_CHECK_EXISTS([glib-2.0 >= 2.20.0 gobject-2.0], [pkg_cv_[]GLIB_LIBS=`$PKG_CONFIG --[]libs "glib-2.0 >= 2.20.0 gobject-2.0" 2>/dev/null`
+m4trace:configure.ac:91: -1- PKG_CHECK_EXISTS([glib-2.0 >= 2.28.0 gio-2.0 gobject-2.0], [pkg_cv_[]GLIB_LIBS=`$PKG_CONFIG --[]libs "glib-2.0 >= 2.28.0 gio-2.0 gobject-2.0" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
 m4trace:configure.ac:91: -1- _PKG_SHORT_ERRORS_SUPPORTED
 m4trace:configure.ac:92: -1- PKG_CHECK_MODULES([JSON], [json-glib-1.0 >= 0.14.0])
@@ -2859,37 +2859,29 @@ m4trace:configure.ac:93: -1- PKG_CHECK_EXISTS([purple <  3], [pkg_cv_[]PURPLE_CF
 m4trace:configure.ac:93: -1- PKG_CHECK_EXISTS([purple <  3], [pkg_cv_[]PURPLE_LIBS=`$PKG_CONFIG --[]libs "purple <  3" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
 m4trace:configure.ac:93: -1- _PKG_SHORT_ERRORS_SUPPORTED
-m4trace:configure.ac:94: -1- PKG_CHECK_MODULES([ZLIB], [zlib])
-m4trace:configure.ac:94: -1- m4_pattern_allow([^ZLIB_CFLAGS$])
-m4trace:configure.ac:94: -1- m4_pattern_allow([^ZLIB_LIBS$])
-m4trace:configure.ac:94: -1- PKG_CHECK_EXISTS([zlib], [pkg_cv_[]ZLIB_CFLAGS=`$PKG_CONFIG --[]cflags "zlib" 2>/dev/null`
+m4trace:configure.ac:95: -1- PKG_CHECK_VAR([GLIB_GENMARSHAL], [glib-2.0], [glib_genmarshal])
+m4trace:configure.ac:95: -1- m4_pattern_allow([^GLIB_GENMARSHAL$])
+m4trace:configure.ac:95: -1- PKG_CHECK_EXISTS([glib-2.0], [pkg_cv_[]GLIB_GENMARSHAL=`$PKG_CONFIG --[]variable="glib_genmarshal" "glib-2.0" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
-m4trace:configure.ac:94: -1- PKG_CHECK_EXISTS([zlib], [pkg_cv_[]ZLIB_LIBS=`$PKG_CONFIG --[]libs "zlib" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
-m4trace:configure.ac:94: -1- _PKG_SHORT_ERRORS_SUPPORTED
-m4trace:configure.ac:96: -1- PKG_CHECK_VAR([GLIB_GENMARSHAL], [glib-2.0], [glib_genmarshal])
-m4trace:configure.ac:96: -1- m4_pattern_allow([^GLIB_GENMARSHAL$])
-m4trace:configure.ac:96: -1- PKG_CHECK_EXISTS([glib-2.0], [pkg_cv_[]GLIB_GENMARSHAL=`$PKG_CONFIG --[]variable="glib_genmarshal" "glib-2.0" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
-m4trace:configure.ac:102: -1- PKG_CHECK_VAR([PURPLE_PLUGINDIR], [purple], [plugindir], [PURPLE_PLUGINDIR="$PURPLE_PLUGINDIR"], [PURPLE_PLUGINDIR="$libdir/purple-2"
+m4trace:configure.ac:101: -1- PKG_CHECK_VAR([PURPLE_PLUGINDIR], [purple], [plugindir], [PURPLE_PLUGINDIR="$PURPLE_PLUGINDIR"], [PURPLE_PLUGINDIR="$libdir/purple-2"
     ])
-m4trace:configure.ac:102: -1- m4_pattern_allow([^PURPLE_PLUGINDIR$])
-m4trace:configure.ac:102: -1- PKG_CHECK_EXISTS([purple], [pkg_cv_[]PURPLE_PLUGINDIR=`$PKG_CONFIG --[]variable="plugindir" "purple" 2>/dev/null`
+m4trace:configure.ac:101: -1- m4_pattern_allow([^PURPLE_PLUGINDIR$])
+m4trace:configure.ac:101: -1- PKG_CHECK_EXISTS([purple], [pkg_cv_[]PURPLE_PLUGINDIR=`$PKG_CONFIG --[]variable="plugindir" "purple" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
-m4trace:configure.ac:116: -1- m4_pattern_allow([^PLUGIN_CFLAGS$])
-m4trace:configure.ac:118: -1- AM_CONDITIONAL([STATIC_FACEBOOK], [false])
-m4trace:configure.ac:118: -1- m4_pattern_allow([^STATIC_FACEBOOK_TRUE$])
-m4trace:configure.ac:118: -1- m4_pattern_allow([^STATIC_FACEBOOK_FALSE$])
-m4trace:configure.ac:118: -1- _AM_SUBST_NOTMAKE([STATIC_FACEBOOK_TRUE])
-m4trace:configure.ac:118: -1- _AM_SUBST_NOTMAKE([STATIC_FACEBOOK_FALSE])
-m4trace:configure.ac:119: -1- m4_pattern_allow([^PLUGIN_LDFLAGS$])
-m4trace:configure.ac:120: -1- m4_pattern_allow([^PURPLE_LIBS$])
-m4trace:configure.ac:123: -1- m4_pattern_allow([^LIB@&t@OBJS$])
-m4trace:configure.ac:123: -1- m4_pattern_allow([^LTLIBOBJS$])
-m4trace:configure.ac:123: -1- AM_CONDITIONAL([am__EXEEXT], [test -n "$EXEEXT"])
-m4trace:configure.ac:123: -1- m4_pattern_allow([^am__EXEEXT_TRUE$])
-m4trace:configure.ac:123: -1- m4_pattern_allow([^am__EXEEXT_FALSE$])
-m4trace:configure.ac:123: -1- _AM_SUBST_NOTMAKE([am__EXEEXT_TRUE])
-m4trace:configure.ac:123: -1- _AM_SUBST_NOTMAKE([am__EXEEXT_FALSE])
-m4trace:configure.ac:123: -1- _AM_OUTPUT_DEPENDENCY_COMMANDS
-m4trace:configure.ac:123: -1- _LT_PROG_LTMAIN
+m4trace:configure.ac:115: -1- m4_pattern_allow([^PLUGIN_CFLAGS$])
+m4trace:configure.ac:117: -1- AM_CONDITIONAL([STATIC_FACEBOOK], [false])
+m4trace:configure.ac:117: -1- m4_pattern_allow([^STATIC_FACEBOOK_TRUE$])
+m4trace:configure.ac:117: -1- m4_pattern_allow([^STATIC_FACEBOOK_FALSE$])
+m4trace:configure.ac:117: -1- _AM_SUBST_NOTMAKE([STATIC_FACEBOOK_TRUE])
+m4trace:configure.ac:117: -1- _AM_SUBST_NOTMAKE([STATIC_FACEBOOK_FALSE])
+m4trace:configure.ac:118: -1- m4_pattern_allow([^PLUGIN_LDFLAGS$])
+m4trace:configure.ac:119: -1- m4_pattern_allow([^PURPLE_LIBS$])
+m4trace:configure.ac:122: -1- m4_pattern_allow([^LIB@&t@OBJS$])
+m4trace:configure.ac:122: -1- m4_pattern_allow([^LTLIBOBJS$])
+m4trace:configure.ac:122: -1- AM_CONDITIONAL([am__EXEEXT], [test -n "$EXEEXT"])
+m4trace:configure.ac:122: -1- m4_pattern_allow([^am__EXEEXT_TRUE$])
+m4trace:configure.ac:122: -1- m4_pattern_allow([^am__EXEEXT_FALSE$])
+m4trace:configure.ac:122: -1- _AM_SUBST_NOTMAKE([am__EXEEXT_TRUE])
+m4trace:configure.ac:122: -1- _AM_SUBST_NOTMAKE([am__EXEEXT_FALSE])
+m4trace:configure.ac:122: -1- _AM_OUTPUT_DEPENDENCY_COMMANDS
+m4trace:configure.ac:122: -1- _LT_PROG_LTMAIN

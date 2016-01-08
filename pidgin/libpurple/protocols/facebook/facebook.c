@@ -462,6 +462,7 @@ fb_cb_api_messages(FbApi *api, GSList *msgs, gpointer data)
 	const gchar *text;
 	FbApiMessage *msg;
 	FbData *fata = data;
+	gboolean isself;
 	gboolean mark;
 	gboolean open;
 	gboolean self;
@@ -469,6 +470,7 @@ fb_cb_api_messages(FbApi *api, GSList *msgs, gpointer data)
 	gchar tid[FB_ID_STRMAX];
 	gchar uid[FB_ID_STRMAX];
 	gint id;
+	gint64 tstamp;
 	GSList *l;
 	PurpleAccount *acct;
 	PurpleChatConversation *chat;
@@ -479,6 +481,7 @@ fb_cb_api_messages(FbApi *api, GSList *msgs, gpointer data)
 	acct = purple_connection_get_account(gc);
 	mark = purple_account_get_bool(acct, "mark-read", TRUE);
 	open = purple_account_get_bool(acct, "group-chat-open", TRUE);
+	self = purple_account_get_bool(acct, "show-self", TRUE);
 
 	for (l = msgs; l != NULL; l = l->next) {
 		msg = l->data;
@@ -491,8 +494,14 @@ fb_cb_api_messages(FbApi *api, GSList *msgs, gpointer data)
 			continue;
 		}
 
-		self = (msg->flags & FB_API_MESSAGE_FLAG_SELF) != 0;
-		flags = self ? PURPLE_MESSAGE_SEND : PURPLE_MESSAGE_RECV;
+		isself = (msg->flags & FB_API_MESSAGE_FLAG_SELF) != 0;
+
+		if (isself && !self) {
+			continue;
+		}
+
+		flags = isself ? PURPLE_MESSAGE_SEND : PURPLE_MESSAGE_RECV;
+		tstamp = msg->tstamp / 1000;
 
 		if (msg->flags & FB_API_MESSAGE_FLAG_IMAGE) {
 			if (!(msg->flags & FB_API_MESSAGE_FLAG_DONE)) {
@@ -513,11 +522,11 @@ fb_cb_api_messages(FbApi *api, GSList *msgs, gpointer data)
 		}
 
 		if (msg->tid == 0) {
-			if (mark && !self) {
+			if (mark && !isself) {
 				fb_data_set_unread(fata, msg->uid, TRUE);
 			}
 
-			fb_util_serv_got_im(gc, uid, text, flags, time(NULL));
+			fb_util_serv_got_im(gc, uid, text, flags, tstamp);
 			g_free(html);
 			continue;
 		}
@@ -538,11 +547,11 @@ fb_cb_api_messages(FbApi *api, GSList *msgs, gpointer data)
 			id = purple_chat_conversation_get_id(chat);
 		}
 
-		if (mark && !self) {
+		if (mark && !isself) {
 			fb_data_set_unread(fata, msg->tid, TRUE);
 		}
 
-		fb_util_serv_got_chat_in(gc, id, uid, text, flags, time(NULL));
+		fb_util_serv_got_chat_in(gc, id, uid, text, flags, tstamp);
 		g_free(html);
 	}
 }
@@ -582,6 +591,7 @@ fb_cb_api_thread(FbApi *api, FbApiThread *thrd, gpointer data)
 {
 	FbApiUser *user;
 	FbData *fata = data;
+	gboolean active;
 	gchar tid[FB_ID_STRMAX];
 	gchar uid[FB_ID_STRMAX];
 	gint id;
@@ -596,8 +606,9 @@ fb_cb_api_thread(FbApi *api, FbApiThread *thrd, gpointer data)
 	FB_ID_TO_STR(thrd->tid, tid);
 
 	chat = purple_conversations_find_chat_with_account(tid, acct);
+	active = (chat != NULL) && !purple_chat_conversation_has_left(chat);
 
-	if (chat == NULL) {
+	if (!active) {
 		chat = purple_serv_got_joined_chat(gc, id, tid);
 	}
 
@@ -615,7 +626,7 @@ fb_cb_api_thread(FbApi *api, FbApiThread *thrd, gpointer data)
 			fb_buddy_add_nonfriend(acct, user);
 		}
 
-		purple_chat_conversation_add_user(chat, uid, NULL, 0, TRUE);
+		purple_chat_conversation_add_user(chat, uid, NULL, 0, active);
 	}
 }
 
@@ -853,13 +864,6 @@ fb_login(PurpleAccount *acct)
 	PurpleConnection *gc;
 
 	gc = purple_account_get_connection(acct);
-
-	if (!purple_ssl_is_supported()) {
-		purple_connection_error(gc,
-			PURPLE_CONNECTION_ERROR_NO_SSL_SUPPORT,
-			_("SSL support unavailable"));
-		return;
-	}
 
 	fata = fb_data_new(gc);
 	api = fb_data_get_api(fata);
@@ -1161,7 +1165,7 @@ fb_chat_join(PurpleConnection *gc, GHashTable *data)
 	id = fb_id_hash(&tid);
 	chat = purple_conversations_find_chat(gc, id);
 
-	if (chat != NULL) {
+	if ((chat != NULL) && !purple_chat_conversation_has_left(chat)) {
 		purple_conversation_present(PURPLE_CONVERSATION(chat));
 		return;
 	}
@@ -1475,42 +1479,42 @@ purple_init_plugin(PurplePlugin *plugin)
 	memset(&info, 0, sizeof info);
 	memset(&pinfo, 0, sizeof pinfo);
 
-	info.magic         = PURPLE_PLUGIN_MAGIC;
+	info.magic = PURPLE_PLUGIN_MAGIC;
 	info.major_version = PURPLE_MAJOR_VERSION;
 	info.minor_version = PURPLE_MINOR_VERSION;
-	info.type          = PURPLE_PLUGIN_PROTOCOL;
-	info.priority      = PURPLE_PRIORITY_DEFAULT;
-	info.id            = FB_PROTOCOL_ID;
-	info.name          = "Facebook";
-	info.version       = PACKAGE_VERSION;
-	info.summary       = N_("Facebook Protocol Plugin");
-	info.description   = N_("Facebook Protocol Plugin");
-	info.homepage      = PACKAGE_URL;
-	info.load          = plugin_load;
-	info.unload        = plugin_unload;
-	info.extra_info    = &pinfo;
+	info.type = PURPLE_PLUGIN_PROTOCOL;
+	info.priority = PURPLE_PRIORITY_DEFAULT;
+	info.id = FB_PROTOCOL_ID;
+	info.name = "Facebook";
+	info.version = PACKAGE_VERSION;
+	info.summary = N_("Facebook Protocol Plugin");
+	info.description = N_("Facebook Protocol Plugin");
+	info.homepage = PACKAGE_URL;
+	info.load = plugin_load;
+	info.unload = plugin_unload;
+	info.extra_info = &pinfo;
 
-	pinfo.options            = OPT_PROTO_CHAT_TOPIC;
-	pinfo.list_icon          = fb_list_icon;
-	pinfo.tooltip_text       = fb_client_tooltip_text;
-	pinfo.status_types       = fb_status_types;
-	pinfo.blist_node_menu    = fb_client_blist_node_menu;
-	pinfo.chat_info          = fb_chat_info;
+	pinfo.options = OPT_PROTO_CHAT_TOPIC;
+	pinfo.list_icon = fb_list_icon;
+	pinfo.tooltip_text = fb_client_tooltip_text;
+	pinfo.status_types = fb_status_types;
+	pinfo.blist_node_menu = fb_client_blist_node_menu;
+	pinfo.chat_info = fb_chat_info;
 	pinfo.chat_info_defaults = fb_chat_info_defaults;
-	pinfo.login              = fb_login;
-	pinfo.close              = fb_close;
-	pinfo.send_im            = fb_im_send;
-	pinfo.send_typing        = fb_im_send_typing;
-	pinfo.set_status         = fb_server_set_status;
-	pinfo.join_chat          = fb_chat_join;
-	pinfo.get_chat_name      = fb_chat_get_name;
-	pinfo.chat_invite        = fb_chat_invite;
-	pinfo.chat_send          = fb_chat_send;
-	pinfo.set_chat_topic     = fb_chat_set_topic;
-	pinfo.roomlist_get_list  = fb_roomlist_get_list;
-	pinfo.roomlist_cancel    = fb_roomlist_cancel;
-	pinfo.offline_message    = fb_client_offline_message;
-	pinfo.struct_size        = sizeof pinfo;
+	pinfo.login = fb_login;
+	pinfo.close = fb_close;
+	pinfo.send_im = fb_im_send;
+	pinfo.send_typing = fb_im_send_typing;
+	pinfo.set_status = fb_server_set_status;
+	pinfo.join_chat = fb_chat_join;
+	pinfo.get_chat_name = fb_chat_get_name;
+	pinfo.chat_invite = fb_chat_invite;
+	pinfo.chat_send = fb_chat_send;
+	pinfo.set_chat_topic = fb_chat_set_topic;
+	pinfo.roomlist_get_list = fb_roomlist_get_list;
+	pinfo.roomlist_cancel = fb_roomlist_cancel;
+	pinfo.offline_message = fb_client_offline_message;
+	pinfo.struct_size = sizeof pinfo;
 
 	opt = purple_account_option_int_new(_("Buddy list sync interval"),
 	                                    "sync-interval", 30);
@@ -1518,6 +1522,10 @@ purple_init_plugin(PurplePlugin *plugin)
 
 	opt = purple_account_option_bool_new(_("Mark messages as read"),
 	                                     "mark-read", TRUE);
+	opts = g_list_prepend(opts, opt);
+
+	opt = purple_account_option_bool_new(_("Show self messages"),
+	                                     "show-self", TRUE);
 	opts = g_list_prepend(opts, opt);
 
 	opt = purple_account_option_bool_new(_("Show unread messages"),
