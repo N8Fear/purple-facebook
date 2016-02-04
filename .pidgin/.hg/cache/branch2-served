@@ -1,4 +1,4 @@
-4e789f9eec2af91e7e0906c5e4ce13501362a492 37515
+fa3c41b69e47ded8e0214d5e8c8ffc689a8fe051 37565
 2f6aa52eacdb2e640d5d7ee5815fbadeef356eaf c charkins.dockletgeom
 5293c90e891f74c13112d03d974df1c0708c6815 c cipher_breakout
 2322b6b9fcb7a2f3278f2553695a131cd4267097 c cpw.attention_ui
@@ -39,7 +39,7 @@ efb7f7c243908455a7c1fdc6eb91fcc93cea2185 c cpw.rekkanoryo.prefs_window
 d0ff163547d493d7f2f28966970bfc670ca07f51 c cpw.resiak.disconnectreason
 f844f21c43dd8b566beee0d8dcf12f9b614e143d c cpw.sulabh.yahoo_16
 684ab19eb00fef4fd72b4063d3a0f34353f768e8 c custom_smiley
-ad2ee74b913ae50e170b1d06413fa2a494a9ee76 o default
+0fc4638f51ef4985b7778bba6a0d2b0bfd6b5d9f o default
 b2852dbd8595cfcaa23f7fe281d8d3cdfbc68935 c elb.make
 0dfde0378f21d08e3f04a228e0dec35d02ca9aed o facebook
 2ca868a81faa0763c280bfd6399463ee071df7a8 c finch.workspaces
@@ -55,6 +55,7 @@ dccfc128a58b496e6191c6b80e28ab082c72e60d o next.minor
 04447b1f6403b8a78fa0938b0e8b91555c0a9b58 c openq
 e6bcb1628c572f07aaa7e00dbaa19014c8354320 c padding
 f28a2741123558d86d46e3df8a3c4288ffe90cfb o purple-plugin-path
+9e1b392c606b3ec44365bdbe53d6b91d902af2d5 o purple-proxy-to-gio
 0b6c4677e52b2068c8f41154580807940aa8008e c release-2.1.0
 c024bed8fdd5b65f903ff760d3f22330e94c339f c release-2.2.1
 fd6f10367d3156836e3e7bb047502b99a4deb832 c release-2.2.2
@@ -72,7 +73,7 @@ a17a77cbefc76c92ebdb54ff282a463619f9db1b c release-2.6.3
 8cf083761af48bc1e2cd438947ba12c78ec3d85c c release-2.7.2
 9c6db2c041007b46fada6642abcae232eb69bb05 c release-2.7.7
 cefaf8feb01cdc8ce0ad9f613e9085daad1fca6a c release-2.9.0
-4e789f9eec2af91e7e0906c5e4ce13501362a492 o release-2.x.y
+fa3c41b69e47ded8e0214d5e8c8ffc689a8fe051 o release-2.x.y
 5a740d40503d8b740e002bedfc4d86095e5b1da6 o replace-nm-with-gio
 945caa0d6436181e3ab68c59c777d802f9f2d3ff c rlaager.gaim_migration
 db156c9a707d730a50326f120d9d41fa038b75e8 c sadrul.conv.persistent
