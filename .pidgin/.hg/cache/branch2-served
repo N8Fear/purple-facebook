@@ -1,4 +1,4 @@
-1786ba2950ce90dce053a3047089cb7c77c729a1 37574
+9479ee6b22e29f7589fc683365c8a67ce697f8d2 38029
 3c4a36856de7983accf8456d4ba5590a9a2f079f o EionRobb/httpc-edited-online-with-bitbucket-1454996408809
 2f6aa52eacdb2e640d5d7ee5815fbadeef356eaf c charkins.dockletgeom
 5293c90e891f74c13112d03d974df1c0708c6815 c cipher_breakout
@@ -40,14 +40,17 @@ efb7f7c243908455a7c1fdc6eb91fcc93cea2185 c cpw.rekkanoryo.prefs_window
 d0ff163547d493d7f2f28966970bfc670ca07f51 c cpw.resiak.disconnectreason
 f844f21c43dd8b566beee0d8dcf12f9b614e143d c cpw.sulabh.yahoo_16
 684ab19eb00fef4fd72b4063d3a0f34353f768e8 c custom_smiley
-1786ba2950ce90dce053a3047089cb7c77c729a1 o default
+9479ee6b22e29f7589fc683365c8a67ce697f8d2 o default
 b2852dbd8595cfcaa23f7fe281d8d3cdfbc68935 c elb.make
 0dfde0378f21d08e3f04a228e0dec35d02ca9aed o facebook
 2ca868a81faa0763c280bfd6399463ee071df7a8 c finch.workspaces
+ca46fc6c7be580078e268475667024a1cf0c3b60 o fix-bonjour-mac
 792ff0633917ebd23764e23f6610e2cc3a84278a o fracting/configureac-allocate-64-bytes-for-strfti-1454955939684
 1966704b3e42c57b4b48d2584ed8ecd4f36b7756 o gaim
 daee19f72cbb268ff48b1428a97664d320b097c6 o gtkdoc-conversion
 f9dd7117ade0e49b00cb7c17d5235312840ce338 c imhtml.customlinks
+cebd73cb4a339bb9e44eb35cef756574edb42847 o irc-len-fix
+b76dd48063d6fa9b37f9e210a8dea34c759c8ecf o irc-len-fix-bp
 b99873683821d4c450ce32e4a93ba2831d7507cc c khc.msnp15
 46bc5e18d59c86bf39fe58d713e6db4007af6639 c maiku.vv
 13e4ae613a6aaa30cbd449130b54f97657a6546a o mxit
@@ -55,9 +58,12 @@ b99873683821d4c450ce32e4a93ba2831d7507cc c khc.msnp15
 7b7a143ddfafe47574d2626bca1bde1a89b92b74 c next.major
 dccfc128a58b496e6191c6b80e28ab082c72e60d o next.minor
 04447b1f6403b8a78fa0938b0e8b91555c0a9b58 c openq
+a04664500716054e133d9cc422b5da3c4cf4361f o oscar_auth
 e6bcb1628c572f07aaa7e00dbaa19014c8354320 c padding
+8bdfa6a4e56f9fa6b0c577fd2c7810d8be52fd7d o provide-uri-handler-desktop-file
 f28a2741123558d86d46e3df8a3c4288ffe90cfb o purple-plugin-path
 9e1b392c606b3ec44365bdbe53d6b91d902af2d5 o purple-proxy-to-gio
+e6ccacaa63226565ff34e6cf9a4a06a5feb854a8 o purple-ssl-to-gio
 0b6c4677e52b2068c8f41154580807940aa8008e c release-2.1.0
 c024bed8fdd5b65f903ff760d3f22330e94c339f c release-2.2.1
 fd6f10367d3156836e3e7bb047502b99a4deb832 c release-2.2.2
@@ -75,7 +81,7 @@ a17a77cbefc76c92ebdb54ff282a463619f9db1b c release-2.6.3
 8cf083761af48bc1e2cd438947ba12c78ec3d85c c release-2.7.2
 9c6db2c041007b46fada6642abcae232eb69bb05 c release-2.7.7
 cefaf8feb01cdc8ce0ad9f613e9085daad1fca6a c release-2.9.0
-fa3c41b69e47ded8e0214d5e8c8ffc689a8fe051 o release-2.x.y
+8e11cd9b32e73e9920fa3aa4025b7fd36f4e5a77 o release-2.x.y
 5a740d40503d8b740e002bedfc4d86095e5b1da6 o replace-nm-with-gio
 945caa0d6436181e3ab68c59c777d802f9f2d3ff c rlaager.gaim_migration
 db156c9a707d730a50326f120d9d41fa038b75e8 c sadrul.conv.persistent
